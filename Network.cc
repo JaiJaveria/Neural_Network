@@ -5,151 +5,18 @@
 // Exception AssertionError;
 // std::vector<std::vector<std::vector<double> > > as threeDVector
 
-bool eqSize(std::vector<std::vector<double> > a,std::vector<std::vector<double> > b)
-{
-    if (a.size()==b.size())
-    {
-        /* code */
-        if(a.size()==0)
-            return true;
-        if(a[0].size()==b[0].size())
-            return true;
-    }
-
-    return false;
-}
-
-std::vector<std::vector<double> > transpose(std::vector<std::vector<double> > a)
-{
-    std::vector<std::vector<double> > ret;
-    ret.assign(a[0].size(),{});
-    int k;
-    for (size_t i = 0; i < a.size(); i++)
-    {
-        k=0;
-        for (size_t j = 0; j < a[i].size(); j++)
-        {
-            ret[k].push_back(a[i][j]);
-            k++;
-            /* code */
-        }
-    }
-    return ret;
-
-}
-
-std::vector<std::vector<double> > elementWiseMult(std::vector<std::vector<double> > a, std::vector<std::vector<double> > b)
-{
-    assert(eqSize(a,b));
-    std::vector<std::vector<double> > ret;
-
-    ret.assign(a.size(),{});
-    for(int i = 0; i < a.size(); ++i)
-    {
-        for(int j = 0; j < a[i].size(); ++j)
-        {
-            ret[i].push_back(a[i][j]*b[i][j]);
-        }
-    }
-    return ret;
-
-}
-void elementWiseArithematic(std::vector<std::vector<double> > &a, std::vector<std::vector<double> > b, double (*operand)(double, double))
-{
-    assert(eqSize(a,b));
-    // std::vector<std::vector<double> > ret;
-
-    // ret.assign(a.size(),{});
-    for(int i = 0; i < a.size(); ++i)
-    {
-        for(int j = 0; j < a[i].size(); ++j)
-        {
-            a[i][j]=operand(a[i][j],b[i][j]);
-            // ret[i].push_back(a[i][j]-b[i][j]);
-        }
-    }
-    // return ret;
-
-}
-void elementWiseArithematicAlpha(std::vector<std::vector<double> > &a, std::vector<std::vector<double> > b, double (*operand)(double, double), double alpha)
-{
-    assert(eqSize(a,b));
-    // std::vector<std::vector<double> > ret;
-
-    // ret.assign(a.size(),{});
-    for(int i = 0; i < a.size(); ++i)
-    {
-        for(int j = 0; j < a[i].size(); ++j)
-        {
-            a[i][j]=operand(a[i][j],alpha*b[i][j]);
-            // ret[i].push_back(a[i][j]-b[i][j]);
-        }
-    }
-    // return ret;
-
-}
-
-void printMat(std::vector<std::vector<double>> bias)
-{
-    for (auto i =0; i <bias.size(); i++)
-    {
-        for (auto j = 0; j < bias[i].size(); j++)
-        {
-            printf("%f ",bias[i][j] );
-            // printf("\n");
-        }
-        printf("\n");
-
-    }
-    printf("\n" );
-}
-std::vector<std::vector<double> > matMul(std::vector<std::vector<double> > a, std::vector<std::vector<double> > b)
-{
-    assert(a[0].size()==b.size());
-    // printf("95--\n" );
-    // printMat(a);
-    // printMat(b);
-    std::vector<std::vector<double> > ret;
-    ret.assign(a.size(),{});
-
-    for(int i = 0; i < a.size(); ++i)
-    {
-        // printf("13--\n" );
-        for(int j = 0; j < b[0].size(); ++j)
-        {
-            ret[i].push_back(0);
-            // printf("17--%f\n",ret[i][j] );
-            for(int k = 0; k < b.size(); ++k)
-                ret[i][j] += a[i][k] * b[k][j];
-        }
-    }
-
-
-    return ret;
-}
-void addNum(std::vector<std::vector<double>> &v, std::vector<double> b)
-{
-    // std::vector<std::vector<double>> ret;
-    // ret.assign(v.size(),{});
-    for(int i = 0; i < v.size(); ++i)
-        for(int j = 0; j < v[i].size(); ++j)
-            v[i][j]=v[i][j]+b[i];
-            // ret[i][j]=v[i][j]+b[i];
-        // return ret;
-
-}
-double subt(double a, double b)
-{
-    return a-b;
-}
-double multiply(double a, double b)
-{
-    return a*b;
-}
-double add(double a, double b)
-{
-    return a+b;
-}
+void assert(bool a);
+bool eqSize(std::vector<std::vector<double> > a,std::vector<std::vector<double> > b);
+std::vector<std::vector<double> > transpose(std::vector<std::vector<double> > a);
+std::vector<std::vector<double> > elementWiseMult(std::vector<std::vector<double> > a, std::vector<std::vector<double> > b);
+void elementWiseArithematic(std::vector<std::vector<double> > &a, std::vector<std::vector<double> > b, double (*operand)(double, double));
+void elementWiseArithematicAlpha(std::vector<std::vector<double> > &a, std::vector<std::vector<double> > b, double (*operand)(double, double), double alpha);
+void printMat(std::vector<std::vector<double>> bias);
+std::vector<std::vector<double> > matMul(std::vector<std::vector<double> > a, std::vector<std::vector<double> > b);
+void addNum(std::vector<std::vector<double>> &v, std::vector<double> b);
+double subt(double a, double b);
+double multiply(double a, double b);
+double add(double a, double b);
 
 std::vector<std::vector<double>> twoDArithematic(std::vector<std::vector<double>> v, std::vector<std::vector<double> > b, double (*operand)(double, double))
 {
